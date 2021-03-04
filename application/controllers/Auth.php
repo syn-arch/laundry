@@ -5,6 +5,10 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
+		if ($this->session->userdata('id_user') != '') {
+			redirect('dashboard','refresh');
+		}
+
 		$valid = $this->form_validation;
 
 		$valid->set_rules('username', 'username', 'required');
@@ -21,6 +25,7 @@ class Auth extends CI_Controller {
 
 					$array = array(
 						'id_user' => $user['id_user'],
+						'id_outlet' => $user['id_outlet'],
 						'nama' => $user['nama'],
 						'role' => $user['role']
 					);

@@ -50,81 +50,92 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo base_url('dashboard') ?>" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
                 </p>
               </a>
             </li>
+            <?php if ($this->session->userdata('role') != 'kasir'): ?>
+              <?php if ($this->session->userdata('role') != 'owner'): ?>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-box"></i>
+                    <p>
+                      Data Master
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('outlet') ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Outlet</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('paket') ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Paket</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('member') ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Member</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('user') ?>" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data User</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              <?php endif ?>
+            <?php endif ?>
+
+            <?php if ($this->session->userdata('role') != 'owner'): ?>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-dollar-sign"></i>
+                  <p>
+                    Transaksi 
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<?php echo base_url('transaksi/tambah') ?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Transaksi baru</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url('transaksi') ?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Riwayat Transaksi</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            <?php endif ?>
+
+            <?php if ($this->session->userdata('role') != 'kasir'): ?>
+              <li class="nav-item">
+                <a href="<?php echo base_url('laporan') ?>" class="nav-link">
+                  <i class="nav-icon fa fa-book"></i>
+                  <p>
+                    Laporan
+                  </p>
+                </a>
+              </li>
+            <?php endif ?>
+
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-box"></i>
-                <p>
-                  Data Master
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Outlet</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Paket</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Member</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data User</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-dollar-sign"></i>
-                <p>
-                  Transaksi 
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Transaksi baru</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Riwayat Transaksi</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-book"></i>
-                <p>
-                  Laporan
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo base_url('auth/logout') ?>" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
                   Logout
@@ -141,16 +152,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0"><?php echo $judul ?></h1>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
+
+      <?php if ($judul != 'Tambah Transaksi'): ?>  
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><?php echo $judul ?></h1>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+      <?php endif ?>
+
 
       <!-- Main content -->
       <div class="content">

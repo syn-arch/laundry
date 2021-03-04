@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2021 at 08:22 AM
+-- Generation Time: Mar 04, 2021 at 07:09 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -33,8 +33,19 @@ CREATE TABLE `det_transaksi` (
   `id_transaksi` int(11) NOT NULL,
   `id_paket` int(11) NOT NULL,
   `qty` double NOT NULL,
-  `keterangan` text
+  `keterangan` text,
+  `total_harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `det_transaksi`
+--
+
+INSERT INTO `det_transaksi` (`id_dettransaksi`, `id_transaksi`, `id_paket`, `qty`, `keterangan`, `total_harga`) VALUES
+(1, 1, 1, 5, '', 5000),
+(2, 2, 1, 3, '', 3000),
+(3, 2, 2, 5, '', 25000),
+(4, 3, 2, 10, '', 50000);
 
 -- --------------------------------------------------------
 
@@ -49,6 +60,13 @@ CREATE TABLE `tb_member` (
   `jenis_kelamin` enum('L','P') DEFAULT NULL,
   `tlp` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_member`
+--
+
+INSERT INTO `tb_member` (`id_member`, `nama`, `alamat`, `jenis_kelamin`, `tlp`) VALUES
+(1, 'Adiyatna Sukmana', 'Jakart Selatan', 'L', '083822623177');
 
 -- --------------------------------------------------------
 
@@ -84,6 +102,14 @@ CREATE TABLE `tb_paket` (
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_paket`
+--
+
+INSERT INTO `tb_paket` (`id_paket`, `id_outlet`, `jenis`, `nama_paket`, `harga`) VALUES
+(1, 1, 'kiloan', 'Selimut', 1000),
+(2, 1, 'selimut', 'Paket Selimut Keluarga', 5000);
+
 -- --------------------------------------------------------
 
 --
@@ -103,8 +129,19 @@ CREATE TABLE `tb_transaksi` (
   `pajak` int(11) DEFAULT NULL,
   `status` enum('baru','proses','selesai','diambil') DEFAULT NULL,
   `dibayar` enum('dibayar','belum_dibayar') DEFAULT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `total_bayar` int(11) NOT NULL,
+  `cash` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_transaksi`
+--
+
+INSERT INTO `tb_transaksi` (`id_transaksi`, `id_outlet`, `kd_invoice`, `id_member`, `tgl`, `batas_waktu`, `tgl_bayar`, `biaya_tambahan`, `diskon`, `pajak`, `status`, `dibayar`, `id_user`, `total_bayar`, `cash`) VALUES
+(1, 1, 'TR-040321001', 1, '2021-03-04 12:55:00', '0000-00-00 00:00:00', '2021-03-04 12:55:00', 0, 0, 0, 'baru', 'dibayar', 1, 5000, 5000),
+(2, 1, 'TR-040321002', 1, '2021-03-04 12:55:00', '0000-00-00 00:00:00', '2021-03-04 12:55:00', 0, 0, 0, 'baru', 'dibayar', 1, 28000, 30000),
+(3, 1, 'TR-040321003', 1, '2021-03-04 12:56:00', '0000-00-00 00:00:00', '2021-03-04 12:56:00', 0, 0, 0, 'baru', 'dibayar', 1, 50000, 50000);
 
 -- --------------------------------------------------------
 
@@ -126,7 +163,8 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `nama`, `username`, `password`, `id_outlet`, `role`) VALUES
-(1, 'Admin', 'admin', '$2y$10$2OuzO4FLTYcvIZN8QblBi.LrPDNXFFLWyhQ1OM/fxaXa6QTkNzNYW', 1, 'admin');
+(1, 'Admin', 'admin', '$2y$10$2OuzO4FLTYcvIZN8QblBi.LrPDNXFFLWyhQ1OM/fxaXa6QTkNzNYW', 1, 'admin'),
+(2, 'kasir', 'kasir', '$2y$10$9Z9VPli6U2Qz37P5bFTYtuxKqqaJU4exDcbc3D3/OXCMtyJ2A66za', 1, 'owner');
 
 --
 -- Indexes for dumped tables

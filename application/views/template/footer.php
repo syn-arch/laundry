@@ -37,5 +37,7 @@
 <script src="<?php echo base_url('vendor/adminlte/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('vendor/adminlte/') ?>dist/js/adminlte.min.js"></script>
+<!-- custom js -->
+<script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 </body>
 </html>
